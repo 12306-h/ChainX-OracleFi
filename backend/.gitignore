@@ -1,0 +1,38 @@
+# 虚拟环境
+venv/
+env/
+ENV/
+
+# 缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 日志文件
+*.log
+logs/
+
+# 环境变量
+.env
+.env.local
+.env.development
+.env.production
+
+# IDE相关
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 临时文件
+.tmp/
+temp/
+tmp/
+*.backup
+*.bak
+
+# 测试和文档
+tests/
+docs/ 
