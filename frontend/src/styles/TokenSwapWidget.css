@@ -1,0 +1,877 @@
+.swap-widget-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 95vw;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.swap-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #2d3748;
+  color: white;
+}
+
+.swap-widget-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-swap-widget {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.swap-widget-content {
+  padding: 16px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.cross-chain-warning {
+  background-color: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.cross-chain-warning p {
+  margin: 5px 0;
+  color: #b45309;
+}
+
+.swap-error {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  color: #b91c1c;
+}
+
+.swap-details {
+  margin: 16px 0;
+}
+
+.swap-summary {
+  background-color: #f8fafc;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.swap-summary p {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.swap-assets {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.from-asset, .to-asset {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.arrow {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.chain-tag {
+  display: inline-block;
+  font-size: 10px;
+  color: #ffffff;
+  background-color: #64748b;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: normal;
+}
+
+/* 对不同链的标签使用不同的颜色 */
+.chain-tag[data-chain="ethereum"] {
+  background-color: #627eea;
+}
+
+.chain-tag[data-chain="polygon"] {
+  background-color: #8247e5;
+}
+
+.chain-tag[data-chain="bsc"] {
+  background-color: #f3ba2f;
+  color: #000000;
+}
+
+.chain-tag[data-chain="arbitrum"] {
+  background-color: #28a0f0;
+}
+
+.chain-tag[data-chain="optimism"] {
+  background-color: #ff0420;
+}
+
+.chain-tag[data-chain="avalanche"] {
+  background-color: #e84142;
+}
+
+.chain-tag[data-chain="mantle"] {
+  background-color: #000000;
+}
+
+.swap-reason {
+  font-style: italic;
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 8px;
+}
+
+/* 交易选项相关样式 */
+.trade-options {
+  margin-top: 20px;
+}
+
+.trade-options h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.trade-option-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.trade-option-card h5 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #0f172a;
+  font-size: 15px;
+}
+
+.trade-option-card p {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.trade-option-button {
+  padding: 8px 16px;
+  background-color: #64748b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.trade-option-button:hover:not(:disabled) {
+  background-color: #475569;
+}
+
+.trade-option-button.primary {
+  background-color: #3b82f6;
+}
+
+.trade-option-button.primary:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.trade-option-button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.uniswap-widget-container {
+  width: 100%;
+  height: 356px;
+  margin-top: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cross-chain-info {
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.cross-chain-info p {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #475569;
+}
+
+.cross-chain-info ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.cross-chain-info li {
+  margin-bottom: 8px;
+}
+
+.cross-chain-info a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cross-chain-info a:hover {
+  text-decoration: underline;
+}
+
+.swap-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.execute-swap-button {
+  padding: 10px 20px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.execute-swap-button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.execute-swap-button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* 背景遮罩 */
+.swap-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .swap-widget-container {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+  }
+  
+  .swap-widget-content {
+    max-height: none;
+    flex: 1;
+  }
+}
+
+/* 错误详情样式 */
+.error-details {
+  margin-top: 10px;
+  font-size: 0.9em;
+  border-top: 1px solid #ffcaca;
+  padding-top: 10px;
+}
+
+.error-details p {
+  margin: 5px 0;
+}
+
+.error-details ul {
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.error-details li {
+  margin-bottom: 3px;
+}
+
+/* 交易设置样式 */
+.swap-settings {
+  margin-top: 15px;
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 15px;
+}
+
+.settings-toggle {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  color: #64748b;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.settings-toggle:hover {
+  color: #3b82f6;
+}
+
+.advanced-settings {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.setting-item {
+  margin-bottom: 12px;
+}
+
+.setting-item label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.slippage-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.slippage-options button {
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.slippage-options button.active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.slippage-options button:hover:not(.active) {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.custom-slippage {
+  display: flex;
+  align-items: center;
+}
+
+.custom-slippage input {
+  width: 60px;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: right;
+}
+
+.custom-slippage span {
+  margin-left: 4px;
+}
+
+.warning {
+  margin-top: 10px;
+  color: #f59e0b;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 交易卡片样式增强 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.recommended-badge {
+  background-color: #10b981;
+  color: white;
+}
+
+.warning-badge {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.trade-option-card.recommended {
+  border: 1px solid #10b981;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+}
+
+.trade-option-card.not-recommended {
+  border: 1px solid #e5e7eb;
+  opacity: 0.9;
+}
+
+.trade-option-button.secondary {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+}
+
+.trade-option-button.secondary:hover:not(:disabled) {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.warning-text {
+  color: #f59e0b;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* 失败交易分析样式 */
+.last-failed-tx {
+  margin-bottom: 20px;
+  background-color: #fff1f0;
+  border: 1px solid #ffccc7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.failed-tx-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #ff7875;
+  color: white;
+}
+
+.failed-tx-header h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.failed-tx-header .close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.failed-tx-header .close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.failed-tx-content {
+  padding: 12px 16px;
+}
+
+.failed-tx-content p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #434343;
+}
+
+.recommendation {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed #ffccc7;
+  text-align: center;
+}
+
+.recommendation p {
+  color: #cf1322;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.recommendation .trade-option-button {
+  display: inline-block;
+  width: auto;
+  padding: 6px 16px;
+  font-size: 14px;
+}
+
+/* 模态框覆盖层 */
+.token-swap-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+/* 模态框容器 */
+.token-swap-modal {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  width: 90%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 标题部分 */
+.token-swap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.token-swap-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* 内容部分 */
+.token-swap-content {
+  padding: 24px;
+}
+
+/* 批量交易指示器 */
+.batch-indicator {
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 交易详情 */
+.trade-details {
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.token-amount {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.token-amount .label {
+  min-width: 36px;
+  font-weight: 600;
+  color: #444;
+}
+
+.value-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.token-value {
+  font-weight: 600;
+  margin-right: 6px;
+  font-size: 18px;
+  color: #333;
+}
+
+.token-symbol {
+  font-weight: 600;
+  color: #0066cc;
+  font-size: 16px;
+}
+
+.chain-name {
+  margin-left: 6px;
+  font-size: 12px;
+  color: #666;
+  background-color: #eee;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.arrow {
+  text-align: center;
+  margin: 12px 0;
+  font-size: 24px;
+  color: #888;
+}
+
+.trade-reason {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed #ddd;
+}
+
+.trade-reason .label {
+  font-weight: 600;
+  color: #444;
+  margin-right: 8px;
+}
+
+.trade-reason .value {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.cross-chain-message {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background-color: #fff8e1;
+  border-left: 3px solid #ffc107;
+  font-size: 14px;
+  color: #856404;
+  border-radius: 0 8px 8px 0;
+}
+
+/* 错误消息 */
+.error-message {
+  padding: 12px 16px;
+  margin: 16px 0;
+  background-color: #ffebee;
+  border-left: 3px solid #f44336;
+  color: #c62828;
+  font-size: 14px;
+  border-radius: 0 8px 8px 0;
+}
+
+/* 交易成功提示 */
+.transaction-success {
+  padding: 12px 16px;
+  margin: 16px 0;
+  background-color: #e8f5e9;
+  border-left: 3px solid #4caf50;
+  color: #2e7d32;
+  border-radius: 0 8px 8px 0;
+}
+
+.transaction-success a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.transaction-success a:hover {
+  text-decoration: underline;
+}
+
+/* 按钮容器 */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* 交换按钮 */
+.swap-button {
+  padding: 14px 20px;
+  background-color: #0066cc; /* 主题蓝色 */
+  background-image: linear-gradient(135deg, #0066cc, #0055bb);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.swap-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: all 0.6s;
+}
+
+.swap-button:hover {
+  background-image: linear-gradient(135deg, #0077dd, #0066cc);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+}
+
+.swap-button:hover:before {
+  left: 100%;
+}
+
+.swap-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.3);
+}
+
+.swap-button:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* 复制链接按钮 */
+.copy-link-button {
+  padding: 12px 20px;
+  background-color: white;
+  color: #0066cc;
+  border: 1px solid #d2e3fc;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-link-button:hover {
+  background-color: #f0f7ff;
+  border-color: #99c5ff;
+}
+
+/* 下一个交易按钮 */
+.next-button {
+  padding: 12px 20px;
+  background-color: #4caf50;
+  background-image: linear-gradient(135deg, #4caf50, #43a047);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.next-button:hover {
+  background-image: linear-gradient(135deg, #5cb860, #4caf50);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.next-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+/* 没有交易信息时的提示 */
+.no-trade-message {
+  text-align: center;
+  padding: 32px 24px;
+  color: #666;
+  font-style: italic;
+} 

@@ -1,0 +1,653 @@
+.token-balances {
+    width: 100%;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .dashboard-header h2 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dashboard-icon {
+    font-size: 1.6rem;
+  }
+  
+  .dashboard-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    position: relative;
+  }
+  
+  .total-value-card {
+    background: linear-gradient(135deg,
+      rgba(18, 18, 38, 0.95),
+      rgba(38, 38, 78, 0.95)
+    );
+    color: white;
+    padding: 2rem;
+    border-radius: 50%;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    box-shadow: 
+      0 0 30px rgba(0, 243, 255, 0.2),
+      inset 0 0 50px rgba(0, 243, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(15deg) rotateY(-5deg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .total-value-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(123, 47, 247, 0.1) 0%, transparent 50%);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .total-value-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+      transparent 0%,
+      rgba(0, 243, 255, 0.1) 25%,
+      rgba(123, 47, 247, 0.1) 50%,
+      rgba(255, 51, 102, 0.1) 75%,
+      transparent 100%
+    );
+    border-radius: 50%;
+    z-index: 2;
+    animation: rotateGradient 8s linear infinite;
+  }
+
+  .total-value-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #00f3ff, #7b2ff7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    position: relative;
+    z-index: 3;
+  }
+  
+  .total-value-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00f3ff, #7b2ff7, #ff3366);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 3;
+    text-shadow: 
+      0 0 20px rgba(0, 243, 255, 0.5),
+      0 0 40px rgba(0, 243, 255, 0.3);
+    animation: textGlow 2s ease-in-out infinite;
+  }
+  
+  .update-info {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    margin-top: 1rem;
+  }
+  
+  .refresh-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #2ecc71;
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .chart-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(18, 18, 38, 0.95);
+    border-radius: 12px;
+    box-shadow: 
+      0 0 20px rgba(0, 243, 255, 0.2),
+      inset 0 0 10px rgba(0, 243, 255, 0.1);
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .chart-card h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+  }
+  
+  .bar-chart-container {
+    height: 400px;
+    margin: 0 -1rem;
+  }
+  
+  /* 自定义柱状图样式 */
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: #e0e0e0;
+  }
+  
+  .recharts-xAxis .recharts-cartesian-axis-tick-value {
+    font-size: 12px;
+    fill: #2c3e50;
+  }
+  
+  .recharts-yAxis .recharts-cartesian-axis-tick-value {
+    font-size: 12px;
+    fill: #2c3e50;
+  }
+  
+  .recharts-tooltip-wrapper {
+    background-color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .recharts-default-tooltip {
+    background-color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+  }
+  
+  .recharts-tooltip-label {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .recharts-tooltip-item {
+    color: #4a5568 !important;
+    font-size: 13px !important;
+  }
+  
+  /* 资产列表卡片样式 */
+  .asset-list-card {
+    background: rgba(72, 0, 142, 0.2);
+    border-radius: 12px;
+    box-shadow: 
+      0 0 20px rgba(147, 112, 219, 0.2),
+      inset 0 0 10px rgba(147, 112, 219, 0.1);
+    padding: 1.5rem;
+    border: 1px solid rgba(147, 112, 219, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    height: 100%;
+  }
+  
+  .asset-list-card h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+  }
+  
+  .asset-list {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-right: 10px;
+  }
+  
+  .chain-assets {
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1rem;
+  }
+  
+  .chain-assets:last-child {
+    border-bottom: none;
+  }
+  
+  .chain-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .chain-header h4 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+  }
+  
+  .chain-total {
+    font-weight: 600;
+    color: #3498db;
+  }
+  
+  .token-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .token-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .token-item:last-child {
+    border-bottom: none;
+  }
+  
+  .token-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .token-symbol {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .token-balance {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+  }
+  
+  .token-value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+  
+  .token-price {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+  }
+  
+  .token-total-value {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .loading-container, .error-container, .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: #7f8c8d;
+    text-align: center;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 0.5;
+      transform: scale(0.8);
+    }
+  }
+
+  @keyframes rotateGradient {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes textGlow {
+    0%, 100% {
+      filter: brightness(1);
+    }
+    50% {
+      filter: brightness(1.2);
+    }
+  }
+
+  .total-value-card:hover {
+    transform: perspective(1000px) rotateX(20deg) rotateY(-8deg) scale(1.05);
+    box-shadow: 
+      0 0 40px rgba(0, 243, 255, 0.3),
+      inset 0 0 60px rgba(0, 243, 255, 0.2);
+    border-color: rgba(0, 243, 255, 0.4);
+  }
+
+  .total-value-card:hover::before {
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(0, 243, 255, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(123, 47, 247, 0.15) 0%, transparent 50%);
+  }
+
+  .total-value-card:active {
+    transform: perspective(1000px) rotateX(15deg) rotateY(-5deg) scale(0.95);
+    box-shadow: 
+      0 0 20px rgba(0, 243, 255, 0.2),
+      inset 0 0 40px rgba(0, 243, 255, 0.1);
+    border-color: rgba(0, 243, 255, 0.3);
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+    
+    .dashboard-header h2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .dashboard-actions {
+      width: 100%;
+      align-items: center;
+    }
+    
+    .total-value-card {
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .update-info {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+      padding: 0 1rem;
+    }
+    
+    .total-value-amount {
+      font-size: 1.8rem;
+    }
+    
+    .bar-chart-container {
+      height: 400px;
+      margin: 0;
+    }
+    
+    .chart-card {
+      padding: 1rem;
+    }
+  }
+
+  .pie-chart-container {
+    height: 380px;
+    position: relative;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, 
+      rgba(18, 18, 38, 0.98), 
+      rgba(18, 18, 38, 0.95)
+    );
+    border-radius: 12px;
+    box-shadow: 
+      0 0 20px rgba(0, 243, 255, 0.1),
+      inset 0 0 30px rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.15);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    margin-bottom: -1rem;
+  }
+
+  .pie-chart-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(123, 47, 247, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .pie-chart-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+      transparent 0%,
+      rgba(0, 243, 255, 0.1) 25%,
+      rgba(123, 47, 247, 0.1) 50%,
+      rgba(255, 51, 102, 0.1) 75%,
+      transparent 100%
+    );
+    opacity: 0.5;
+    animation: chartGlow 8s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  @keyframes chartGlow {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) rotate(45deg); }
+    100% { transform: translateX(-100%) rotate(45deg); }
+  }
+
+  /* 自定义饼图样式 */
+  .recharts-pie-sector {
+    filter: drop-shadow(0 0 8px rgba(0, 243, 255, 0.3));
+    transition: all 0.3s ease;
+  }
+
+  .recharts-pie-sector:hover {
+    filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.5));
+    transform: scale(1.02);
+  }
+
+  .recharts-legend-item {
+    transition: all 0.3s ease;
+  }
+
+  .recharts-legend-item:hover {
+    transform: translateX(5px);
+  }
+
+  .recharts-tooltip-wrapper {
+    background: rgba(10, 11, 31, 0.95) !important;
+    border: 1px solid rgba(0, 243, 255, 0.3) !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 
+      0 0 20px rgba(0, 243, 255, 0.2),
+      inset 0 0 10px rgba(0, 243, 255, 0.1) !important;
+  }
+
+  .recharts-default-tooltip {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .recharts-tooltip-label {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 600 !important;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5) !important;
+  }
+
+  .recharts-tooltip-item-list {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .recharts-tooltip-item {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.3) !important;
+  }
+
+  /* 资产占比部分 */
+  .pie-chart-section {
+    margin-bottom: 2rem;
+  }
+
+  /* 资产比例列表部分 */
+  .asset-proportion-section {
+    background: rgba(10, 11, 31, 0.95);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+  }
+
+  .asset-proportion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .proportion-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: rgba(147, 112, 219, 0.1);
+    border: 1px solid rgba(147, 112, 219, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .proportion-item:hover {
+    background: rgba(147, 112, 219, 0.2);
+    transform: translateX(5px);
+    border-color: rgba(147, 112, 219, 0.3);
+  }
+
+  .proportion-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .proportion-symbol {
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(147, 112, 219, 0.3);
+  }
+
+  .proportion-chain {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+
+  .proportion-value {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .proportion-percentage {
+    color: #00f3ff;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+  }
+
+  .proportion-amount {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+  }
+
+  /* 响应式布局调整 */
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .pie-chart-section {
+      margin-bottom: 1.5rem;
+    }
+    
+    .proportion-item {
+      padding: 0.5rem;
+    }
+    
+    .proportion-value {
+      gap: 0.5rem;
+    }
+  } 
