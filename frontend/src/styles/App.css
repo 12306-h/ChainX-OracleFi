@@ -1,0 +1,455 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    background: #f5f5f5; /* 最外层：淡雅灰 */
+    overflow-x: hidden; /* 防止水平滚动 */
+  }
+  
+  .main-container {
+    display: flex;
+    flex: 1;
+    padding-top: 70px; /* 恢复原来的内边距 */
+    margin-top: 50px; /* 使用外边距来增加间距 */
+    max-width: 100vw; /* 限制最大宽度 */
+    position: relative; /* 为侧边栏定位提供参考 */
+  }
+  
+  .content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    min-width: 0; /* 防止内容溢出 */
+    transition: padding-right 0.3s ease; /* 改为 padding-right 的过渡 */
+    width: 100%; /* 确保内容区域占满可用空间 */
+  }
+  
+  /* 添加侧边栏打开时的内容区域样式 */
+  .sidebar-open .content {
+    padding-right: 340px; /* 320px 侧边栏宽度 + 20px 额外空间 */
+  }
+  
+  .connect-section {
+    max-width: 600px;
+    margin: 15rem auto 8rem; /* 增加顶部和底部边距 */
+    padding: 3rem 2rem; /* 增加上下内边距 */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid #e8e8e8;
+    min-height: fit-content; /* 适应内容高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative; /* 添加相对定位 */
+  }
+
+  .book-animation {
+    position: absolute;
+    top: -250px;
+    left: 50%;
+    transform: translateX(-50%);
+    perspective: 2000px;
+    z-index: 1;
+  }
+  
+  .book {
+    width: 200px;
+    height: 280px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .book-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateY(-15deg);
+    animation: gentle-rotate 12s ease-in-out infinite;
+  }
+  
+ 
+  
+ 
+  
+  .book-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+      rgba(13, 17, 38, 0.95),
+      rgba(21, 25, 45, 0.95)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00f7ff;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 
+      -5px 5px 15px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(0, 247, 255, 0.2),
+      inset 0 0 15px rgba(0, 247, 255, 0.1);
+    transform: translateZ(20px);
+    backface-visibility: hidden;
+    border: 1px solid rgba(0, 247, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    overflow: hidden;
+  }
+  
+  .book-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(45deg, 
+        transparent 0%,
+        rgba(0, 247, 255, 0.1) 15%,
+        transparent 30%
+      ),
+      repeating-linear-gradient(
+        45deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(0, 247, 255, 0.1) 40.5%,
+        transparent 41%
+      );
+    animation: dataFlow 3s linear infinite;
+  }
+  
+  .book-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #1a365d;
+    transform: translateZ(-20px);
+    border-radius: 4px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+  }
+  
+  .book-page {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    top: 2.5%;
+    left: 2.5%;
+    background: linear-gradient(135deg,
+      rgba(13, 17, 38, 0.9),
+      rgba(21, 25, 45, 0.9)
+    );
+    transform-origin: left;
+    transform-style: preserve-3d;
+    transform: translateX(7px) translateZ(-5px);
+    box-shadow: 
+      0 0 15px rgba(0, 247, 255, 0.2),
+      inset 0 0 10px rgba(0, 247, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    color: #00f7ff;
+    font-weight: bold;
+    border: 1px solid rgba(0, 247, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    overflow: hidden;
+  }
+  
+  .book-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(0, 247, 255, 0.1) 40.5%,
+        transparent 41%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(0, 247, 255, 0.1) 40.5%,
+        transparent 41%
+      );
+    animation: dataGrid 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .book-page:hover::before {
+    opacity: 1;
+  }
+  
+  .book-page::after {
+    content: 'OracleFi';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00f7ff;
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 247, 255, 0.2),
+      transparent
+    );
+    animation: textGlow 2s ease-in-out infinite;
+    backface-visibility: hidden;
+  }
+  
+  .book-page:last-child::after {
+    content: 'ChainX';
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotateX(0); }
+    50% { transform: translateY(-15px) rotateX(5deg); }
+  }
+  
+  @keyframes gentle-rotate {
+    0%, 100% { transform: rotateY(-15deg); }
+    50% { transform: rotateY(-10deg); }
+  }
+  
+  @keyframes flip-page-1 {
+    0%, 100% { 
+      transform: rotateY(0);
+      filter: brightness(1);
+    }
+    20% { 
+      transform: rotateY(-150deg);
+      filter: brightness(1.2);
+    }
+    80% { 
+      transform: rotateY(-150deg);
+      filter: brightness(1.2);
+    }
+  }
+  
+  @keyframes flip-page-2 {
+    0%, 100% { 
+      transform: rotateY(0);
+      filter: brightness(1);
+    }
+    25% { 
+      transform: rotateY(-140deg);
+      filter: brightness(1.3);
+    }
+    75% { 
+      transform: rotateY(-140deg);
+      filter: brightness(1.3);
+    }
+  }
+  
+  @keyframes flip-page-3 {
+    0%, 100% { 
+      transform: rotateY(0);
+      filter: brightness(1);
+    }
+    30% { 
+      transform: rotateY(-130deg);
+      filter: brightness(1.4);
+    }
+    70% { 
+      transform: rotateY(-130deg);
+      filter: brightness(1.4);
+    }
+  }
+
+  @keyframes dataFlow {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  @keyframes dataGrid {
+    0% { 
+      transform: translateY(-100%) translateX(-100%);
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% { 
+      transform: translateY(100%) translateX(100%);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes textGlow {
+    0%, 100% { 
+      opacity: 0.8;
+      text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    }
+    50% { 
+      opacity: 1;
+      text-shadow: 0 0 20px rgba(0, 247, 255, 0.8);
+    }
+  }
+  
+  .connect-section h2 {
+    margin-bottom: 1rem;
+    color: #333333;
+  }
+  
+  .connect-section p {
+    margin-bottom: 2rem;
+    color: #666666;
+  }
+  
+  .dashboard-section {
+    background-color: #ffffff; /* 内层：纯白 */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    border: 1px solid #e8e8e8;
+    margin-top: 7rem; /* 继续增加外边距 */
+  }
+  
+  /* 仪表板标签样式 */
+  .dashboard-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #fafafa; /* 标签背景：浅雅灰 */
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+  }
+
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 160px;
+  }
+  
+  .tab-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666666;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .tab-button:hover {
+    color: #3b82f6;
+  }
+  
+  .tab-button.active {
+    color: #3b82f6;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #22c55e;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .progress-bar.active::after {
+    transform: scaleX(1);
+  }
+  
+  /* 标签内容区域样式 */
+  .tab-content {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .footer {
+    padding: 1rem;
+    text-align: center;
+    background-color: #ffffff;
+    color: #666666;
+    font-size: 0.9rem;
+    width: 100%;
+    border-top: 1px solid #e8e8e8;
+  }
+  
+  /* 添加媒体查询以适应不同屏幕尺寸 */
+  @media (max-width: 1200px) {
+    .main-container {
+      flex-direction: column;
+    }
+    
+    .sidebar {
+      width: 100% !important;
+      height: 300px !important;
+      border-top: 1px solid #e8e1e1;
+      border-left: none !important;
+    }
+    
+    /* 在小屏幕上，侧边栏打开时不需要调整内容区域的 padding */
+    .sidebar-open .content {
+      padding-right: 2rem;
+    }
+    
+    .dashboard-tabs {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .tab-button {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .tab-content {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .content {
+      padding: 1rem;
+    }
+    
+    .dashboard-section {
+      padding: 1rem;
+    }
+  } 

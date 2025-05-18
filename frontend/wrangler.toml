@@ -1,0 +1,4 @@
+# Pages专用配置文件
+name = "ai-adviser"
+compatibility_date = "2023-01-01"
+pages_build_output_dir = "dist"
